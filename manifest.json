@@ -1,0 +1,6 @@
+{
+  "name": "Distractimer",
+  "description": "Google Chrome extension to manage your daily distractions",
+  "version": "1.0",
+  "manifest_version": 3
+}
