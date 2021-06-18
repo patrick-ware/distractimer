@@ -23,6 +23,13 @@ changeColor.addEventListener("click", async () => {
     });
   }
 
+// Get the minutes value from the DOM
+function setTimer() {
+  timerValue = document.querySelector("#minutes").value;
+  console.log("the number of minutes you just selected is", timerValue)
+}
+// 
+
   // Set the date we're counting down to
 let countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
