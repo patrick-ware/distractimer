@@ -12,7 +12,10 @@ button.current {
               0 0 0 4px black;
 }
 
-.timer {
-  width: 60px;
+#timer {
+  width: 150px;
   height: 30px;
+  color: red;
+  text-align: center;
+  font-size: 24px;
 }
