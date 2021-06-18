@@ -13,11 +13,6 @@ body {
   border: none;
   border-radius: 2px;
 }
-  
-button.current {
-  box-shadow: 0 0 0 2px white,
-              0 0 0 4px black;
-}
 
 #timer {
   width: 200px;
@@ -27,6 +22,18 @@ button.current {
   font-family: 'Roboto', sans-serif;
 }
 
+#submit {
+  background-color: #2979ff;
+  border: none;
+  border-radius: 4px;
+  transition: 0.8s;
+  color: white;
+}
+
+#submit:hover {
+  color: black;
+  background-color: #00e5ff
+}
 input {
   width: 40%;
 }
