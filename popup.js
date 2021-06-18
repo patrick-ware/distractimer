@@ -22,6 +22,15 @@ changeColor.addEventListener("click", async () => {
       document.body.style.backgroundColor = color;
     });
   }
+////////////////////////////////////////////////////////////////////////////////////////////
+
+// Initialize button with user's preferred color
+let submitButton = document.getElementById("submit");
+
+// When the button is clicked, inject setPageBackgroundColor into current page
+submitButton.addEventListener("click", () => {
+  console.log("hello console")
+})
 
 // Get the minutes value from the DOM
 function setTimer() {
