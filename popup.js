@@ -29,7 +29,7 @@ let submitButton = document.getElementById("submit");
 
 // When the button is clicked, inject setPageBackgroundColor into current page
 submitButton.addEventListener("click", () => {
-  console.log("hello console")
+  document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
 })
 
 // Get the minutes value from the DOM
