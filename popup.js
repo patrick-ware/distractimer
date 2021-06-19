@@ -22,20 +22,22 @@ changeColor.addEventListener("click", async () => {
       document.body.style.backgroundColor = color;
     });
   }
-////////////////////////////////////////////////////////////////////////////////////////////
 
-// Initialize button with user's preferred color
+// Checking to see if button is responsive
 let submitButton = document.getElementById("submit");
 
-// When the button is clicked, inject setPageBackgroundColor into current page
 submitButton.addEventListener("click", () => {
   document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
 })
 
 // demo timer
-let sec = 30;
+let sec = document.getElementById("minutes").value*60
+
 let timer = setInterval(function(){
-    document.getElementById('timeLeft').innerHTML='00:'+sec;
+    let displayMinutes = Math.floor(sec/60);
+    let displaySeconds = sec%60;
+    let remainingTime= displayMinutes.toString() +":"+ displaySeconds.toString();
+    document.getElementById('timeLeft').innerHTML= remainingTime
     sec--;
     if (sec < 0) {
         clearInterval(timer);
