@@ -35,8 +35,13 @@ let sec = document.getElementById("minutes").value*60
 
 let timer = setInterval(function(){
     let displayMinutes = Math.floor(sec/60);
-    let displaySeconds = sec%60;
-    let remainingTime= displayMinutes.toString() +":"+ displaySeconds.toString();
+    // set seconds to always display two digits
+    let displaySeconds = sec%60
+    displaySeconds +=""
+    if(displaySeconds.length == 1 || displaySeconds==9) {
+      displaySeconds = "0" + displaySeconds;
+    }
+    let remainingTime= displayMinutes.toString() +":"+displaySeconds.toString();
     document.getElementById('timeLeft').innerHTML= remainingTime
     sec--;
     if (sec < 0) {
