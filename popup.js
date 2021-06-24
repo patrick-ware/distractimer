@@ -1,3 +1,11 @@
+// Checking to see if button is responsive
+let submitButton = document.getElementById("submit");
+
+submitButton.addEventListener("click", () => {
+  startTime(addMinutes())
+  // document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
+})
+
 // Call this when the pop-up is shown
 chrome.runtime.sendMessage({ cmd: 'GET_TIME' }, response => {
   if (response.time) {
@@ -36,13 +44,7 @@ function startTime(time) {
   startTimer(time);
 }
 
-// Event listener for when button is clicked
-submitButton.addEventListener("click", () => {
-  startTime(addMinutes())
-  // document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
-})
-
-///////////////////////////////////////////////// COLOR CHANGE ////////////////////////////////////////////////
+///////////////////////////////////// COLOR CHANGE //////////////////////////////////////////////
 // Initialize button with user's preferred color
 let changeColor = document.getElementById("changeColor");
 
