@@ -26,20 +26,45 @@ changeColor.addEventListener("click", async () => {
 // Checking to see if button is responsive
 let submitButton = document.getElementById("submit");
 
-// submitButton.addEventListener("click", () => {
-//   document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
-// })
-
-let sec = document.getElementById("minutes").value*60
-// 1. Send the background a message requesting the user's data
-
 submitButton.addEventListener("click", () => {
-  chrome.runtime.sendMessage(sec, (response) => {
-    // 3. Got an asynchronous response with the data from the background
-    console.log('received user data', response);
-    document.getElementById('didYouClickIt').innerHTML= response
-  });
+  document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
 })
+
+
+// Call this when the pop-up is shown
+chrome.runtime.sendMessage({ cmd: 'GET_TIME' }, response => {
+  if (response.time) {
+    const time = new Date(response.time);
+    startTimer(time)
+  }
+});
+
+function startTimer(time) {
+  if (time.getTime() > Date.now()) {
+    setInterval(() => {
+      // Find the distance between now and the count down date
+      let distance = time - Date.now;
+      
+      // Time calculations for minutes and seconds
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      let remainingTime = minutes.toString() + ":" + seconds.toString();
+
+      document.getElementById('timeLeft').innerHTML = remainingTime
+    }, 1000)
+  }
+}
+let minutes = document.getElementById("minutes").value
+
+function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes*60000);
+}
+
+function startTime(time) {
+
+  chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time });
+  startTimer(time);
+}
 
 // demo timer
 // let timer = setInterval(function(){

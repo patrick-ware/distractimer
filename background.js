@@ -8,31 +8,17 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const testTime = '525,600 minutes'
 
-// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//   // 2. A page requested user data, respond with a copy of `user`
-//   if (message === 'get-user-data') {
-//     sendResponse(testTime);
-//   }
-// });
-
 //from documentation
-chrome.runtime.onMessage.addListener((sec, sender, sendResponse) => {
-  // 2. A page requested user data, respond with a copy of `user`
-  if (sec) {
-    let timer = setInterval(function(){
-      let displayMinutes = Math.floor(sec/60);
-      // set seconds to always display two digits
-      let displaySeconds = sec%60
-      displaySeconds +=""
-      if(displaySeconds.length == 1 || displaySeconds==9) {
-        displaySeconds = "0" + displaySeconds;
-      }
-      let remainingTime= displayMinutes.toString() +":"+displaySeconds.toString();
-      sec--;
-      if (sec < 0) {
-          clearInterval(timer);
-      }
-  }, 1000);
-    sendResponse(remainingTime);
+let timerID;
+let timerTime;
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.cmd === 'START_TIMER') {
+    timerTime = new Date(request.when);
+    timerID = setTimeout(() => {
+       // the time is app, alert the user.
+    }, timerTime.getTime() - Date.now());
+  } else if (request.cmd === 'GET_TIME') {
+    sendResponse({ time: timerTime });
   }
 });
