@@ -31,7 +31,6 @@ submitButton.addEventListener("click", () => {
   // document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
 })
 
-
 // Call this when the pop-up is shown
 chrome.runtime.sendMessage({ cmd: 'GET_TIME' }, response => {
   if (response.time) {
@@ -45,7 +44,7 @@ function startTimer(time) {
   if (time.getTime() > Date.now()) {
     setInterval(() => {
       // Find the distance between now and the count down date
-      let distance = time - Date.now;
+      let distance = time.getTime() - new Date().getTime();
       
       // Time calculations for minutes and seconds
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -60,6 +59,7 @@ function startTimer(time) {
 // Add minutes
 function addMinutes() {
   let minutes = document.getElementById("minutes").value
+  document.getElementById('didYouClickIt').innerHTML = new Date(Date.now() + minutes*60000);
   return new Date(Date.now() + minutes*60000);
 }
 
