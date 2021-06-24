@@ -34,7 +34,7 @@ let sec = document.getElementById("minutes").value*60
 // 1. Send the background a message requesting the user's data
 
 submitButton.addEventListener("click", () => {
-  chrome.runtime.sendMessage('get-user-data', (response) => {
+  chrome.runtime.sendMessage(sec, (response) => {
     // 3. Got an asynchronous response with the data from the background
     console.log('received user data', response);
     document.getElementById('didYouClickIt').innerHTML= response
