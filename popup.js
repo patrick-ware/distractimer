@@ -26,7 +26,6 @@ function startTimer(time) {
 // Add minutes
 function addMinutes() {
   let minutes = document.getElementById("minutes").value
-  document.getElementById('didYouClickIt').innerHTML = new Date(Date.now() + minutes*60000);
   return new Date(Date.now() + minutes*60000);
 }
 
