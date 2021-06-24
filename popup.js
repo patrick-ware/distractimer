@@ -1,36 +1,3 @@
-// Initialize button with user's preferred color
-let changeColor = document.getElementById("changeColor");
-
-chrome.storage.sync.get("color", ({ color }) => {
-  changeColor.style.backgroundColor = color;
-});
-
-// When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: setPageBackgroundColor,
-    });
-  });
-  
-  // The body of this function will be executed as a content script inside the
-  // current page
-  function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-      document.body.style.backgroundColor = color;
-    });
-  }
-
-// Checking to see if button is responsive
-let submitButton = document.getElementById("submit");
-
-submitButton.addEventListener("click", () => {
-  startTime(addMinutes())
-  // document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
-})
-
 // Call this when the pop-up is shown
 chrome.runtime.sendMessage({ cmd: 'GET_TIME' }, response => {
   if (response.time) {
@@ -69,19 +36,34 @@ function startTime(time) {
   startTimer(time);
 }
 
-// demo timer
-// let timer = setInterval(function(){
-//     let displayMinutes = Math.floor(sec/60);
-//     // set seconds to always display two digits
-//     let displaySeconds = sec%60
-//     displaySeconds +=""
-//     if(displaySeconds.length == 1 || displaySeconds==9) {
-//       displaySeconds = "0" + displaySeconds;
-//     }
-//     let remainingTime= displayMinutes.toString() +":"+displaySeconds.toString();
-//     document.getElementById('timeLeft').innerHTML= remainingTime
-//     sec--;
-//     if (sec < 0) {
-//         clearInterval(timer);
-//     }
-// }, 1000);
+// Event listener for when button is clicked
+submitButton.addEventListener("click", () => {
+  startTime(addMinutes())
+  // document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
+})
+
+///////////////////////////////////////////////// COLOR CHANGE ////////////////////////////////////////////////
+// Initialize button with user's preferred color
+let changeColor = document.getElementById("changeColor");
+
+chrome.storage.sync.get("color", ({ color }) => {
+  changeColor.style.backgroundColor = color;
+});
+
+// When the button is clicked, inject setPageBackgroundColor into current page
+changeColor.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: setPageBackgroundColor,
+    });
+  });
+  
+  // The body of this function will be executed as a content script inside the
+  // current page
+  function setPageBackgroundColor() {
+    chrome.storage.sync.get("color", ({ color }) => {
+      document.body.style.backgroundColor = color;
+    });
+  }
