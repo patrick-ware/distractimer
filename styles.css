@@ -24,6 +24,7 @@ body {
 
 #submit {
   background-color: #2979ff;
+  padding: 3px;
   border: none;
   border-radius: 4px;
   transition: 0.8s;
@@ -35,5 +36,7 @@ body {
   background-color: #00e5ff
 }
 input {
-  width: 40%;
+  width: 20%;
+  padding: 3px 5px;
+  border-radius: 4px;
 }
