@@ -27,7 +27,8 @@ changeColor.addEventListener("click", async () => {
 let submitButton = document.getElementById("submit");
 
 submitButton.addEventListener("click", () => {
-  document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
+  startTime(addMinutes())
+  // document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
 })
 
 
@@ -39,6 +40,7 @@ chrome.runtime.sendMessage({ cmd: 'GET_TIME' }, response => {
   }
 });
 
+// Start timer
 function startTimer(time) {
   if (time.getTime() > Date.now()) {
     setInterval(() => {
@@ -54,14 +56,15 @@ function startTimer(time) {
     }, 1000)
   }
 }
-let minutes = document.getElementById("minutes").value
 
-function addMinutes(date, minutes) {
-  return new Date(date.getTime() + minutes*60000);
+// Add minutes
+function addMinutes() {
+  let minutes = document.getElementById("minutes").value
+  return new Date(Date.now() + minutes*60000);
 }
 
+// Send message to background.js
 function startTime(time) {
-
   chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time });
   startTimer(time);
 }
