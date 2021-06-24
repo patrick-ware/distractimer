@@ -6,30 +6,33 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log('Default background color set to %cgreen', `color: ${color}`);
 });
 
-//from documentation
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.contextMenus.create({
-    "id": "sampleContextMenu",
-    "title": "Sample Context Menu",
-    "contexts": ["selection"]
-  });
+const testTime = '525,600 minutes'
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // 2. A page requested user data, respond with a copy of `user`
+  if (message === 'get-user-data') {
+    sendResponse(testTime);
+  }
 });
 
-// timer code moved over from popup
-let sec = document.getElementById("minutes").value*60
-
-let timer = setInterval(function(){
-    let displayMinutes = Math.floor(sec/60);
-    // set seconds to always display two digits
-    let displaySeconds = sec%60
-    displaySeconds +=""
-    if(displaySeconds.length == 1 || displaySeconds==9) {
-      displaySeconds = "0" + displaySeconds;
-    }
-    let remainingTime= displayMinutes.toString() +":"+displaySeconds.toString();
-    document.getElementById('timeLeft').innerHTML= remainingTime
-    sec--;
-    if (sec < 0) {
-        clearInterval(timer);
-    }
-}, 1000);
+// //from documentation
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//   // 2. A page requested user data, respond with a copy of `user`
+//   if (message) {
+//     let timer = setInterval(function(){
+//       let displayMinutes = Math.floor(sec/60);
+//       // set seconds to always display two digits
+//       let displaySeconds = sec%60
+//       displaySeconds +=""
+//       if(displaySeconds.length == 1 || displaySeconds==9) {
+//         displaySeconds = "0" + displaySeconds;
+//       }
+//       let remainingTime= displayMinutes.toString() +":"+displaySeconds.toString();
+//       sec--;
+//       if (sec < 0) {
+//           clearInterval(timer);
+//       }
+//   }, 1000);
+//     sendResponse(remainingTime);
+//   }
+// });
