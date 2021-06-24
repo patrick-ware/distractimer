@@ -6,6 +6,15 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log('Default background color set to %cgreen', `color: ${color}`);
 });
 
+//from documentation
+chrome.runtime.onInstalled.addListener(function() {
+  chrome.contextMenus.create({
+    "id": "sampleContextMenu",
+    "title": "Sample Context Menu",
+    "contexts": ["selection"]
+  });
+});
+
 // timer code moved over from popup
 let sec = document.getElementById("minutes").value*60
 
