@@ -70,3 +70,27 @@ changeColor.addEventListener("click", async () => {
       document.body.style.backgroundColor = color;
     });
   }
+<<<<<<< HEAD
+=======
+
+// Checking to see if button is responsive
+let submitButton = document.getElementById("submit");
+
+submitButton.addEventListener("click", () => {
+  document.getElementById("didYouClickIt").innerHTML = "you clicked it dawg"
+})
+
+// demo timer
+let sec = document.getElementById("minutes").value*60
+
+let timer = setInterval(function(){
+    let displayMinutes = Math.floor(sec/60);
+    let displaySeconds = sec%60;
+    let remainingTime= displayMinutes.toString() +":"+ displaySeconds.toString();
+    document.getElementById('timeLeft').innerHTML= remainingTime
+    sec--;
+    if (sec < 0) {
+        clearInterval(timer);
+    }
+}, 1000);
+>>>>>>> parent of ea59f5d... timer showing two digits correctly
