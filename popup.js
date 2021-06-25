@@ -16,8 +16,14 @@ function startTimer(time) {
       // Time calculations for minutes and seconds
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      let secondsFixed = ""
+      if (seconds.toString().length === 1) {
+        secondsFixed = "0" + seconds
+      } else {
+        secondsFixed = seconds.toString()
+      }
 
-      let remainingTime = minutes.toString() + ":" + seconds.toString();
+      let remainingTime = minutes.toString() + ":" + secondsFixed;
 
       document.getElementById('timeLeft').innerHTML = remainingTime
     }, 1000)
